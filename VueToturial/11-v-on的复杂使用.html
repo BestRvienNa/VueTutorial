@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-bind的复杂使用</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <!--点击一个按钮切换图片-->
+        <!--为img绑定数据，当数据发生变化时，视图跟着变化 v-bind-->
+        <!--v-bind语法：v-bind:绑定的具体属性-->
+        <!--v-bind可以动态的为元素的属性绑定响应式的数据-->
+        <!--v-bind可以省略，直接使用：代替v-bind:-->
+        <img v-bind:src="imgPath" alt=''></img>
+        <!--绑定事件监听器 可以用 v-on 指令监听 DOM 事件，并在触发时运行一些 JavaScript 代码。语法v-on:-->
+        <!-- <button v-on:click="onChangeClick()">切换图片</button> -->
+        <!--v-on的省略写法：使用@代替v-on-->
+        <button @click="onChangeClick()">切换图片</button>
+    </div>
+</body>
+<script>
+    //vue的初始化
+    //声明式渲染：1.指定vue的控制区域2.指定对应的需要渲染的数据 3.渲染数据到页面中(插值语法{{test}})
+    new Vue({
+    el:'#app',//指定了view的控制区域 div id app
+    //data的值可以是对象，但是在组件中使用data，应该是个函数
+    data:function(){
+    return {
+        //响应式数据：所有在data下声明的数据都是响应式数据
+        msg:'hello vue',
+        imgPath:"./first.png",
+        
+    }
+    },
+    methods:{
+    //如果函数想要访问data里面的对象的话，必须使用this对象
+    onChangeClick(){
+        this.imgPath='./second.png'
+    }
+   }
+    });
+</script>
+</html>

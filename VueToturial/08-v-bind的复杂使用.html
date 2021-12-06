@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-bind的复杂使用</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <!--点击一个按钮切换图片-->
+        <!--为img绑定数据，当数据发生变化时，视图跟着变化 v-bind-->
+        <!--v-bind语法：v-bind:绑定的具体属性-->
+        <!--v-bind可以动态的为元素的属性绑定响应式的数据-->
+        <!--v-bind可以省略，直接使用：代替v-bind:-->
+        <!-- <img v-bind:class="" :src="imgPath" alt=''></img> v-bind绑定class和tail属性值除了字符串以外还可以是对象或数组-->
+        <!--大括号表示对象，冒号前边表示表达式成立添加的类别名：表达式-->
+        <!--绑定class为对象的代码 <img v-bind:class="{'active':false}" :src="imgPath" alt=''></img> -->
+        <!--绑定为数组-v-bind=[类名：类名]-activeClass不加单引号会到data里面去找-->
+        <!-- <div v-bind:class="[activeClass, 'errorClass']">测试class数组</div>  -->
+    </div>
+</body>
+<script>
+    //vue的初始化
+    //声明式渲染：1.指定vue的控制区域2.指定对应的需要渲染的数据 3.渲染数据到页面中(插值语法{{test}})
+    new Vue({
+    el:'#app',//指定了view的控制区域 div id app
+    //data的值可以是对象，但是在组件中使用data，应该是个函数
+    data:function(){
+    return {
+        //响应式数据：所有在data下声明的数据都是响应式数据
+        msg:'hello vue',
+        imgPath:"./first.png",
+      
+    }
+    }
+    });
+</script>
+</html>

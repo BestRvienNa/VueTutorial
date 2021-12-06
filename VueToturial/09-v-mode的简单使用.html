@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model的简单使用</title>
+    <script src="./vue.js"></script>
+</head>
+<!--v-model：
+1.使用场景：它仅仅使用在表单元素中（<input>、<textarea> 及 <select>）还能使用在组件中
+2.作用：双向数据绑定
+01.数据会被展示到元素中
+02.视图的变化会影响数据的内容
+-->
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <input type="text" v-model="msg"/>
+    </div>
+   
+</body>
+<script>
+    //vue的初始化
+    //声明式渲染：1.指定vue的控制区域2.指定对应的需要渲染的数据 3.渲染数据到页面中(插值语法{{test}})
+    new Vue({
+    el:'#app',//指定了view的控制区域 div id app
+    //data的值可以是对象，但是在组件中使用data，应该是个函数
+    data:function(){
+    return {
+        //响应式数据：所有在data下声明的数据都是响应式数据
+        msg:'hello vue'
+    }
+    }
+    });
+</script>
+</html>

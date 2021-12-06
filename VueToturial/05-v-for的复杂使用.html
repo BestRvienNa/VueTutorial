@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for指令的复杂使用</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!--v-for可以根据数据源循环渲染dom元素-->
+    <div id="app">
+        <!--使用v-for指令循环遍历数据源-->
+       <div v-for="(item,index) in dataSource">{{index}}-{{item.name}}</div>
+       <!--使用v-for指令来遍历对象-->
+       <!--v-bind：key标记当前元素用于修改(修改的时候)，并且key的值是唯一的，它是v-for的必须属性-->
+       <div v-for="(val,name,index) in dataSourceobj" v-bind:key="index">{{val}}-{{name}}-{{index}}</div>
+    </div>
+</body>
+<script>
+    //vue的初始化
+    //声明式渲染：1.指定vue的控制区域2.指定对应的需要渲染的数据 3.渲染数据到页面中(插值语法{{test}})
+    new Vue({
+    el:'#app',//指定了view的控制区域 div id app
+    //data的值可以是对象，但是在组件中使用data，应该是个函数
+    data:function(){
+    return {
+     //创建数据源
+     dataSource:[
+         {id:1,
+         name:'张三'},
+         {
+             id:2,
+             name: '李四'
+         },
+         {
+             id:3,
+             name:'王五'
+         }
+         ],
+         dataSourceobj:{
+             age:18,
+             sex:'man',
+             name:'王六'
+         }
+    }
+    }
+    });
+</script>
+</html>
