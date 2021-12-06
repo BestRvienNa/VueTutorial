@@ -19,8 +19,12 @@
     //当有人读取person的age属性时，get(getter)函数就会被调用，返回值就是age的值
     get:function(){
         return number
-    }
-       
+    },
+    //当有人修改setter属性时调用
+    set(value){
+    console.log("有人修改了age属性，且值为",value)
+    number=value
+    }    
     })
 
     console.log(person)
