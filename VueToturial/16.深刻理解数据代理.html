@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        1.vue中的数据代理：通过vm对象来代理data对象中属性的操作
+        2.vue中代理的好处：更加方便的操作data中的元素
+        3.原理：通过object.defineproperty把data对象的所有属性添加到vm上的属性，指定一个getter/setter方法，然后去读写相关属性
+    -->
+    <script>
+        //使用一个对象代理另外一个对象的操作
+      obj1={x:"100"}
+      obj2={y:"50"}
+      Object.defineProperty(obj2,'x',{
+          get(){
+              return obj1.x;
+          },
+          set(value){
+          obj1.x=value
+        }
+      })
+    </script>
+</body>
+
+</html>
