@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姓名案例</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!--data中任意一个数据属性发生变化时，vue就会重新解析模板-->
+    <div id="app">
+        姓：<input type="text" v-model="firstName"><br/><br/>
+        名：<input type="text" v-model="lastName"><br/><br/>
+        姓名：<span>{{fullname}}</span>
+    </div>
+</body>
+<script>
+    new Vue({
+    el:'#app',
+    data:function(){
+    return {
+        firstName:"张",
+        lastName:"三"
+    }
+    },
+    computed:{
+     fullname(){
+         return this.firstName+'-'+this.lastName
+     }
+    }
+    });
+</script>
+</html>

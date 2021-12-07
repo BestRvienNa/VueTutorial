@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件修饰符</title>
+    <script src="./vue.js"></script>
+    <style>
+        *{
+            margin-top: 20px;
+        }
+        .demo1{
+            height: 50px;
+            background-color: aqua;
+        }
+        .box1{
+            padding: 5px;
+            background-color: aqua;
+        }
+        .box2{
+            padding: 5px;
+            background-color: orange;
+        }
+       .list{
+           width: 200px;
+           height: 200px;
+           background-color: orange;
+           overflow: auto;
+       }
+       li{
+           height: 100px;
+       }
+    </style>
+</head>
+<body>
+    <!--
+        vue中事件的修饰符：
+        1.prevent：阻止默认事件
+        2.stop:阻止事件冒泡
+        3.once:事件只触发一次
+        4.capture:使用时间捕捉模式
+        5.self：只有event.target是当前操作的元素时才触发
+        6.passive:事件的默认行为立即执行，无需等到时间回调执行完毕
+
+    -->
+ <div id="app">
+     <h2>欢迎来到{{name}}</h2>
+     <!--阻止默认事件-->
+     <a href="http://www.baidu.com" @click.prevent="informational">点我跳转页面</a>
+      <!--阻止事件冒泡-->
+      <div class="demo1" v-on:click="informational">
+        <button v-on:click.stop="informational">点击提示信息</button>
+      </div>
+     <!--捕捉模式-->
+     <div class="box1"  v-on:click.capture="showmsg(1)">
+         div1
+         <div class="box2" v-on:click.stop="showmsg(2)">
+         div2
+         </div>
+     </div>
+    <!--阻止事件冒泡-->
+    <div class="demo1" v-on:click.self="informational">
+    <button v-on:click="informational">点击提示信息</button>
+    <!--时间立即执行，无需等到回调函数执行完毕,scroll滚动条的滚动 滚动轮的滚动-->
+    <ul @wheel.passive="demo" class="list">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+ </div>
+</body>
+<script>
+   const vm=new Vue({
+        el:"#app",
+        data:{
+            name:"vis"
+        },
+        methods:{
+            informational(event){
+            alert("你好")
+            },
+            showmsg(msg){
+            console.log(msg)
+            },
+            demo(){
+            console.log("@")
+            }
+        }
+
+    })
+</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>键盘事件</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!---
+    vue中常用的别名：
+    回车：enter
+    删除：delete
+    退出：esc
+    空格：space
+    换行：tab
+    上 up
+    下 down
+    左 left
+    右 right   
+    ctrl alt shift meta(win)系统修饰键，配合keyup使用，按下修饰键的同时，再按下其他键，随后释放其他键，事件才能被触发；配合keydown使用，正常触发
+    keycode尽量不要使用，会停止支持
+   Vue.config.keyCodes.自定义键名=“键盘吗”
+
+    -->
+    <!--keydown键盘按下去的时候触发  keyup 键盘在按下去弹上来的时候触发-->
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <input type="text" placeholder="请输入文字" @keyup.enter="showinfo"/>
+    </div>
+</body>
+<script>
+    new Vue({
+    el:'#app',
+    data:function(){
+    return {
+        msg:'hello vue'
+    }
+    },
+    methods:{
+        showinfo(e){
+            // if(e.keyCode!==13)return
+            console.log(e.target.value)
+        }
+    }
+    });
+</script>
+</html>
