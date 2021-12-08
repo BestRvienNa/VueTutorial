@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>监视属性，天气案例</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div class="root">
+        <h2>今天天气{{info}}</h2>
+        <button @click="changeweather">改变天气</button>
+        <hr/>
+        <h3>a的值是：{{numbers.a}}</h3>
+        <button @click="numbers.a++">点我自加</button>
+        <hr/>
+        <h3>b的值是：{{numbers.b}}</h3>
+        <button @click="numbers.b++">点我自加</button>
+    </div>
+</body>
+<script>
+   const vm=new Vue({
+      el:".root",
+      data() {
+          return {
+              isHot:true,
+              numbers:{
+                  a:1,
+                  b:1
+              }
+          }
+      },
+      //监视属性
+      watch: {
+          isHot:{
+              //当ishot发生改变时调用,能获取修改前的值  修改后的值
+              handler(newValue,oldValue){
+              console.log(oldValue)
+              console.log(newValue)
+              }
+          },
+          //监视多级结构中某个属性的变化
+        //   'numbers.a':{
+        //     handler(newValue,oldValue){
+        //       console.log(oldValue)
+        //       console.log(newValue)
+        //       }
+        //   }
+        numbers:{
+            deep:true,//深度监视，监视多级结构中所有属性的变化
+            handler(){
+            console.log("number发生了变化")
+            }
+        }
+      },
+      methods: {
+        changeweather(){
+            this.isHot=!this.isHot
+        }
+      },
+      computed: {
+          info(){
+              return this.isHot?"凉爽":"炎热"
+          }
+      },  
+   })
+ 
+</script>
+</html>
