@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表渲染(基本列表)</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+   
+    <div class="root">
+      <h2>{{name}}</h2>
+      <!--遍历数组-->
+      <ul>
+          <ol v-for="item in persons" :key="item.id">{{item.name}}-{{item.age}}</ol>
+      </ul>
+      <h2>遍历对象 a代表value,b代表key</h2>
+      <ul>
+        <ol v-for="(a,b) in car">{{a}}-{{b}}</ol>
+    </ul>
+    <h2>遍历字符串</h2>
+    <ul>
+        <ol v-for="(a,b) in teststr">{{a}}-{{b}}</ol>
+    </ul
+
+    </div>
+
+</body>
+<script>
+    new Vue({
+        el:".root",
+        data:function(){
+            return{
+                name:"基本列表渲染", 
+                persons:[
+                {
+                id:"001",
+                name:"张三",
+                age:"18"   
+                },
+                {
+                id:"002",
+                name:"李四",
+                age:"15"   
+                },
+                {
+                id:"003",
+                name:"王五",
+                age:"17"   
+                }
+                ],
+                car:{
+                    name:"奥迪",
+                    price:"100",
+                    color:"黑色"
+                },
+                teststr:"hello"
+               
+            }
+        },
+    })
+</script>
+</html>
