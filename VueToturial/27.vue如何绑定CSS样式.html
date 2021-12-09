@@ -39,8 +39,53 @@
      <script src="./vue.js"></script>
 </head>
 <body>
+    <!--绑定样式：
+    1.class样式： class="xxx",xxx可以是字符串 对象 数组
+    2.style样式
+    ：style={fontSize:xxx}其中xxx为动态值
+    ：style="[a,b]"其中a b为样式对象
+    -->
     <div id="root">
-    <div class="happy">test</div>
+    <!--绑定class样式--字符串写法，适用于样式的类名不确定，需要动态指定-->
+    <div class="basic" :class="mood" @click="changeMood">{{name}}</div></br></br>
+    <!--绑定数组适用于有有多个样式，个数不确定和名字也不确定-->
+    <div class="basic" :class="arr">{{name}}</div></br></br>
+    <!--样式的个数名字都确定，绑定的样式个数确定，名字也确定，要动态指定用不用-->
+    <div class="basic" :class="classObj">{{name}}</div></br></br>
+
+    <div class="basic" :style="styleobj">{{name}}</div></br></br>
+    <!--不常用-->
+    <div class="basic" :style="[styleobj,styleobj2]">{{name}}</div>
     </div>
 </body>
+<script>
+    new Vue({
+        el:"#root",
+        data:function(){
+        return{
+            name:"visualization",
+            mood:"normal",
+            arr:['atguigu1','atguigu2','atguigu3'],
+            classObj:{
+                'atguigu1':false,
+                'atguigu2':false
+            },
+            styleobj:{
+                fontSize:'40px',
+                color:'red'
+            },
+            styleobj2:{
+                backgroundColor:"orange"
+            }
+        }
+        },
+        methods: {
+            changeMood(){
+            const arr=['happy','sad','normal']
+            const index=Math.floor(Math.random()*3)
+            this.mood=arr[index]
+            }
+        },
+    })
+</script>
 </html>
