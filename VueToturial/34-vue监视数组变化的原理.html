@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue监视数据变化的原理</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+   
+    <div class="root">
+      <h2>{{name}}</h2>
+      <h2>{{address}}</h2>
+      <hr/>
+      <!--
+         Vue监视数组变化：
+         只监视以下调用数组方法：
+         push：在数组末尾添加一个元素
+         pop：删除数组最后一个元素
+         shift:删除第一个位置的元素
+         unshift:添加数组的第一个元素
+         splice:在数组指定位置添加一个元素
+         sort：数组排序
+         reverse:数组翻转，
+         vue之所以能监视到这些方法的改变，是因为类似重写了数组原生的方法，包装数组原生的修改方法
+      -->
+      <h2>测试Vue.set()方法</h2>
+      <button @click="addsex">增加一个属性</button>
+      <h2>姓名：{{student.name}}</h2>
+      <h2 v-if="student.sex">性别：{{student.sex}}</h2>
+      <h2>年龄：{{student.age}}</h2>
+    </div>
+
+</body>
+<script>
+const vm=new Vue({
+        el:".root",
+        data:function(){
+            return{
+                name:"vis",
+                address:"qingdao" ,
+                student:{
+                    name:"小明",
+                    age:"17",
+                }
+               
+            }
+        },
+        methods: {
+            addsex(){
+                Vue.set(this.student,"sex","女")
+            }
+        },      
+})
+</script>
+</html>
