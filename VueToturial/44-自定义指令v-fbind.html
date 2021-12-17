@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="./vue.js"></script>
+    <title>自定义指令</title>
+</head>
+<body>
+    <div id="root">
+        <h2>当前的n值是：<span v-text="n"></span></h2>
+        <h2>放大后的n值是：<span v-big="n"></span></h2>
+        <!--多字母指令名-->
+        <h2>放大后的n值是：<span v-big-number="n"></span></h2>
+        <button @click="n++">点我n+1</button>
+        <hr>
+        <input type="text" v-fbind:value="n"/>
+    </div>
+    <div class="root2">
+        <h2>root2的fbind</h2>
+        <input type="text" v-fbind:value="n"/>
+    </div>
+</body>
+<script>
+    Vue.directive('fbind',{
+                //指令与元素绑定成功时调用
+                bind(element,binding){
+                    element.value=binding.value
+                },
+                //指令所在元素被插入页面时调用
+                inserted(element,binding){
+                    element.focus()
+                },
+                //指令所在模板被重新解析时调用
+                update(element,binding){
+                    element.value=binding.value   
+                }
+                })
+    new Vue({
+			el:'#root',
+			data:{
+				n:1
+			},
+            //指令
+            directives:{
+                //big函数被调用的时机：1.指令和元素成功绑定时调用  2.指令所在的模板被解析时调用
+                big(element,binding){
+                   console.log(this)//此处的this是window
+                   // console.dir(a)
+                   //console.log(a instanceof HTMLElement)
+                   //console.log(b.value)
+                  element.innerText=binding.value*10
+                },
+                'big-number'(element,binding){
+                   // console.dir(a)
+                   //console.log(a instanceof HTMLElement)
+                   //console.log(b.value)
+                  element.innerText=binding.value*10
+                },
+                // fbind:{
+                // //指令与元素绑定成功时调用
+                // bind(element,binding){
+                //     element.value=binding.value
+                // },
+                // //指令所在元素被插入页面时调用
+                // inserted(element,binding){
+                //     element.focus()
+                // },
+                // //指令所在模板被重新解析时调用
+                // update(element,binding){
+                //     element.value=binding.value   
+                // }
+                // }
+            }
+		})
+        new Vue({
+			el:'.root2',
+			data:{
+				n:1
+			},
+
+		})
+</script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="./vue.js"></script>
+    <title>自定义指令</title>
+</head>
+<body>
+    <div id="root">
+        <h2>当前的n值是：<span v-text="n"></span></h2>
+        <h2>放大后的n值是：<span v-big="n"></span></h2>
+        <button @click="n++">点我n+1</button>
+    </div>
+  
+</body>
+<script>
+    new Vue({
+			el:'#root',
+			data:{
+				n:1
+			},
+            //指令
+            directives:{
+                //big函数被调用的时机：1.指令和元素成功绑定时调用  2.指令所在的模板被解析时调用
+                big(element,binding){
+                   // console.dir(a)
+                   //console.log(a instanceof HTMLElement)
+                   //console.log(b.value)
+                  element.innerText=binding.value*10
+
+
+
+                }
+            }
+		})
+</script>
+</html>
