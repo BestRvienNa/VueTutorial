@@ -8,12 +8,19 @@
     <script src="./vue.js"></script>
 </head>
 <body>
-    
+    <div id="root">
+        <a :href='testurl'>点我跳转</a>
+    </div>
 </body>
 <script>
     //vue的初始化
     new Vue({
-    
+    el:"#root",
+    data() {
+        return {
+            testurl:'http://www.baidu.com'
+        }
+    },
     });
 </script>
 </html>

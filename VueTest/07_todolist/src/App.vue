@@ -2,9 +2,9 @@
   <div id="root">
   <div class="todo-container">
     <div class="todo-wrap">
-      <MyHeader/>
-      <MyList/>
-      <MyFooter/>
+      <MyHeader :addTodo='addTodo'/>
+      <MyList :todos="todos"  :checkTodo="checkTodo" :deleteTodo="deleteTodo"/>
+      <MyFooter :todos="todos" :checkAllTodo="checkAllTodo" :clearAllTodo="clearAllTodo"/>
     </div>
   </div>
 </div>
@@ -20,7 +20,52 @@ components:{
      MyHeader,
      MyList,
      MyFooter
-}
+},
+data() {
+  return {
+    todos:JSON.parse(localStorage.getItem('todos'))||[]
+  }
+},
+methods: {
+  //添加一个todoObj
+  addTodo(todoObj){
+  this.todos.unshift(todoObj)
+  //console.log('我是app组件，我收到了数据',x)
+  },
+  //勾选or取消勾选一个todo
+  checkTodo(id){
+  this.todos.forEach((todo)=>{
+  if(todo.id===id) todo.done=!todo.done
+  })
+  },
+  //删除一个todo
+  deleteTodo(id){
+  this.todos=this.todos.filter((todo)=>{
+        return todo.id!==id
+  })
+  },
+  //全选or 全不选
+  checkAllTodo(done){
+  this.todos.forEach((todo)=>{
+  todo.done=done
+  })
+  },
+  //清除所有已完成
+  clearAllTodo(){
+    this.todos=this.todos.filter((todo)=>{
+    return!todo.done
+    })
+  }
+},
+//深度监视
+watch: {
+  todos:{
+  deep:true,
+  handler(value){
+  localStorage.setItem('todos',JSON.stringify(value))
+  } 
+  }
+},
 }
 </script>
 
