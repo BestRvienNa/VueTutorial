@@ -28,8 +28,16 @@ routes:[
             component:Message,
             children:[
                 {   name:'xiangqing',
-                    path:'detail',
-                    component:Detail
+                    path:'detail/:id/:title', //使用params用中占位符
+                    component:Detail,
+                    //props的第一种写法,该对象中的所有key -value都以props传给detail组件
+                   // props:{a:1,b:'hello'}
+                    //props的第二种写法，值为布尔值，若布尔值为真，就会把路由组件收到的所有params参数，以props的形式传给detail组件
+                   // props:true
+                   //props的第三种写法,函数,服务于query
+                //    props($route){
+                //        return {id:$route.query.id,title:$route.query.title}
+                //    }
                 }
             ]
         },
